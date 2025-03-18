@@ -1,0 +1,78 @@
+# Identifying Duplicates
+
+## Identifying duplicates in film and customer tables
+SELECT *,
+COUNT(*)
+FROM film
+GROUP BY
+  film_id,
+  title,
+  description,
+  release_year,
+  language_id,
+  rental_duration,
+  rental_rate,
+  length,
+  replacement_cost,
+  rating,
+  last_update,
+  special_features,
+  fulltext
+HAVING COUNT(*) >1
+
+SELECT *,
+COUNT(*)
+FROM customer
+GROUP BY
+  customer_id,
+  store_id,
+  first_name,
+  last_name,
+  email,
+  address_id,
+  activebool,
+  create_date,
+  last_update,
+  active
+HAVING COUNT(*) >1
+
+## Identifying Missing Values in film and customer tables
+
+SELECT *
+FROM film
+WHERE film_id IS NULL OR
+  title IS NULL OR
+  etc
+  fulltext IS NULL
+
+SELECT *
+FROM customer
+WHERE customer_id IS NULL OR
+store_id IS NULL OR
+etc
+active IS NULL
+
+## Identifying descriptive statistics for film and customer table
+
+SELECT MIN (release_year) AS release_year_min,
+  MAX(release_year) AS release_year_max,
+  AVG(release_year) AS release_year_avg,
+  COUNT(release_year) AS release_year_count,
+  MIN(rental_duration) AS rental_duration_min,
+  MAX(rental_duration) AS rental_duration_max,
+  AVG(rental_duration) AS rental_duration_avg,
+  COUNT(rental_duration) AS rental_duration_count,
+  MIN(rental_rate) AS rental_rate_min,
+  MAX(rental_rate) AS rental_rate_max,
+  AVG(rental_rate) AS rental_rate_avg,
+  COUNT(rental_rate) AS rental_rate_count,
+  MIN(length) AS length_min,
+  MAX(length) AS length_max,
+  AVG(length) AS length_avg,
+  COUNT(length) AS length_count,
+  MIN(replacement_cost) AS replacement_cost_min,
+  MAX(replacement_cost) AS replacement_cost_max,
+  AVG(replacement_cost) AS replacement_cost_avg,
+  COUNT(replacement_cost) AS replacement_cost_count,
+  COUNT(*) AS count_rows
+FROM film
